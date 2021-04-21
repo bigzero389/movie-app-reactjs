@@ -50,11 +50,12 @@ class App extends React.Component {
   };
 
   add = (() => {
-    console.log("add");
+    // this.state.ount = -1; => 이렇게 하면 render 가 호출되지 않는다.
+    this.setState(current => ({count: current.count + 1}));
   });
 
   minus = (() => {
-    console.log("minus");
+    this.setState(current => ({count: current.count - 1}));
   });
 
   render() {
