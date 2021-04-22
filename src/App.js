@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Movie from "./components/Movie";
+import Movie from "./Movie";
 
 
 
@@ -14,6 +14,7 @@ class App extends React.Component {
   getMovies = async () => {
     const { data: { data: { movies }}} = await axios.get("https://yts.mx/api/v2/list_movies.json?sort_by=rating&limits=30");
     this.setState({ movies, isLoading: false });
+    // console.log(movies);
   }
 
   componentDidMount() {
@@ -24,15 +25,21 @@ class App extends React.Component {
     const { isLoading, movies } = this.state;
     // console.log(movies);
     return (
-      <div>{ isLoading ? "Loading..." : movies.map( movie => {
-        return <Movie key = {movie.id}
-                      id = { movie.id }
-                      year = { movie.year }
-                      title = { movie.title }
-                      summary = { movie.summary }
-                      poster = { movie.medium_cover_image }
-                      rating = { movie.rating } />;
-      }) } </div>
+      <section className="container"> {
+          isLoading ? (
+            <div className="loader">
+              <span className="loader__text">Loading...</span>
+            </div>
+          ) : movies.map( movie => {
+                 return <Movie key = {movie.id}
+                              id = { movie.id }
+                              year = { movie.year }
+                              title = { movie.title }
+                              summary = { movie.summary }
+                              poster = { movie.medium_cover_image }
+                              genres = { movie.genres }
+                              rating = { movie.rating } />;
+      }) } </section>
     );
   };
   
@@ -70,11 +77,11 @@ export default App;
 
 // function Food({name, picture, rating}) {
 //   return (
-//    <div>
+//    <section>
 //      <h2>I like {name} </h2>
 //      <h4>{rating} / 5 </h4>
 //      <img src= {picture} width="50" height="50" alt={name}/>
-//    </div> 
+//    </section> 
 //   );
 // }
 
