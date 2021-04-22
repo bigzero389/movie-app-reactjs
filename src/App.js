@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
+import "./App.css";
 
 
 
@@ -35,7 +36,7 @@ class App extends React.Component {
                               id = { movie.id }
                               year = { movie.year }
                               title = { movie.title }
-                              summary = { movie.summary }
+                              summary = { movie.summary.slice(0,140) }
                               poster = { movie.medium_cover_image }
                               genres = { movie.genres }
                               rating = { movie.rating } />;
